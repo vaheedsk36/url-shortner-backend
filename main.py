@@ -4,8 +4,13 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel  # Import Pydantic's BaseModel
 import string
 import random
+import os
+from dotenv import load_dotenv
 
 from models import Base, URL, SessionLocal, engine
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI()
 

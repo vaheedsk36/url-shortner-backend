@@ -36,6 +36,10 @@ def generate_short_url():
 class URLRequest(BaseModel):
     original_url: str
 
+@app.get("/health-check/")
+def health_test():
+    return {"status": "ok"}
+
 @app.post("/shorten/")
 def shorten_url(request: URLRequest, db: Session = Depends(get_db)):
     short_url = generate_short_url()

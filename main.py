@@ -7,6 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Optional
 from dotenv import load_dotenv
 import os
+import uvicorn
 
 # Load environment variables from .env file
 load_dotenv()
@@ -85,3 +86,7 @@ async def redirect_to_url(short_url: str):
     if db_url is None:
         raise HTTPException(status_code=404, detail="URL not found")
     return {"original_url": db_url["original_url"]}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

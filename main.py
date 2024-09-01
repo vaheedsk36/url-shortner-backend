@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 import string
 import random
@@ -9,7 +10,6 @@ import os
 import logging
 import uvicorn
 from logging_config import setup_logging
-import webbrowser
 
 # Load environment variables from .env file
 load_dotenv()
@@ -62,10 +62,12 @@ async def redirect_to_url(short_url: str):
     if db_url is None:
         logger.warning(f"URL not found for short URL: {short_url}")
         raise HTTPException(status_code=404, detail="URL not found")
-    logger.info(f"Redirecting short URL: {short_url} to {db_url['original_url']}")
-    #return {"original_url": db_url["original_url"]}
-    #print(db_url["original_url"])
-    return webbrowser.open(db_url["original_url"])
+    
+    original_url = db_url["original_url"]
+    logger.info(f"Redirecting short URL: {short_url} to {original_url}")
+    
+    # Use RedirectResponse to redirect to the original URL
+    return RedirectResponse(url=original_url)
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI application...")

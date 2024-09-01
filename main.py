@@ -9,6 +9,7 @@ import os
 import logging
 import uvicorn
 from logging_config import setup_logging
+import webbrowser
 
 # Load environment variables from .env file
 load_dotenv()
@@ -62,7 +63,9 @@ async def redirect_to_url(short_url: str):
         logger.warning(f"URL not found for short URL: {short_url}")
         raise HTTPException(status_code=404, detail="URL not found")
     logger.info(f"Redirecting short URL: {short_url} to {db_url['original_url']}")
-    return {"original_url": db_url["original_url"]}
+    #return {"original_url": db_url["original_url"]}
+    #print(db_url["original_url"])
+    return webbrowser.open(db_url["original_url"])
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI application...")

@@ -71,4 +71,4 @@ async def redirect_to_url(short_url: str):
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI application...")
-    uvicorn.run("main:app", host="127.0.0.1", port=int(os.getenv("PORT") or 8000), reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.getenv("PORT") or 8000), reload=True)

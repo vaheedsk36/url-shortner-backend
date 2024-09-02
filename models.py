@@ -12,6 +12,8 @@ client = AsyncIOMotorClient(DATABASE_URL)
 database = client[DATABASE_NAME]
 url_collection = database["urls"]
 
+SSID: str
+
 class URL(BaseModel):
     short_url: str
     original_url: str

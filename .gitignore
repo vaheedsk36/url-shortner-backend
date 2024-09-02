@@ -4,3 +4,4 @@ venv/
 *.env.*
 *.log
 *.log.gz
+logs/
